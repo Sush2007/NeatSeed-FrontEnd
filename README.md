@@ -1,16 +1,27 @@
-# React + Vite
+# 🌱 NeatSeed
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**NeatSeed** is a smart waste management system that connects **🏠 residents**, **🚛 garbage truck drivers**, and **👨‍💻 administrators** to keep neighborhoods clean and organized.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+- 📍 **Real-Time Tracking** – Residents can view the live location of garbage trucks and receive notifications when the truck is near.  
+- 🖥️ **Admin Dashboard** – Monitor routes, track collection status, manage drivers, and review missed pickups.  
+- 🚛 **Driver App** – Guides drivers through assigned routes, allows marking pickups, and shares live GPS updates.  
+- 📊 **Data Insights** – Access collection history, missed pickups, and analytics for better planning and efficiency.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
+| Layer | Technology |
+|------|------------|
+| **Mobile App** | 📱 React Native (Android) |
+| **Website (Admin Dashboard)** | 💻 React + Tailwind CSS |
+| **Backend** | ⚡ Node.js + Express |
+| **Database** | 🗂️ MongoDB |
+| **Maps & Notifications** | 🗺️ Google Maps API, 🔔 Firebase Cloud Messaging |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Project Structure
+
