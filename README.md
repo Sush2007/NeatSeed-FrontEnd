@@ -17,7 +17,7 @@
 |------|------------|
 | **Mobile App** | 📱 React Native (Android) |
 | **Website (Admin Dashboard)** | 💻 React + Tailwind CSS |
-| **Backend** | ⚡ Node.js + Express |
+| **Backend** | ⚡ Python |
 | **Database** | 🗂️ MongoDB |
 | **Maps & Notifications** | 🗺️ Google Maps API, 🔔 Firebase Cloud Messaging |
 
