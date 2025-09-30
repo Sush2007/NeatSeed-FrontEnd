@@ -1,5 +1,6 @@
 import React from 'react'
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa"; 
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <>
@@ -7,9 +8,12 @@ const Navbar = () => {
       <div className="flex items-center">
         <span className="text-green-700 font-bold text-xl">🌱 NeatSeed</span>
       </div>
-      <button className="bg-green-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-green-800 transition">
+      <Link to="/login">
+       <button className="bg-green-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-green-800 transition">
         Admin Login <FaArrowRight className="ml-2" />
       </button>
+       </Link>
+     
     </nav>
     </>
   )
