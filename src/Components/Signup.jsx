@@ -1,4 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';  
+import { Link } from 'react-router-dom';
+import { IoMdPerson } from "react-icons/io"; 
+import { IoMdMail } from "react-icons/io";
+import { FaPhone } from "react-icons/fa6"; 
+import { TbPassword } from "react-icons/tb";
+import { TbLockPassword } from "react-icons/tb";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -72,8 +78,8 @@ const Signup = () => {
               Full Name
             </label>
             <div className="relative">
-              {/* Note: 'User' component/icon is assumed to be imported or defined elsewhere */}
-              <input
+              <IoMdPerson className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
+              <input 
                 type="text"
                 name="fullName"
                 value={formData.fullName}
@@ -81,6 +87,8 @@ const Signup = () => {
                 placeholder="Enter your full name"
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
               />
+            
+              
             </div>
           </div>
 
@@ -89,7 +97,8 @@ const Signup = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Email Address
             </label>
-            <div className="relative">
+            <div className="relative"> 
+            <IoMdMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
               {/* Note: 'Mail' component/icon is assumed to be imported or defined elsewhere */}
               <input
                 type="email"
@@ -108,6 +117,8 @@ const Signup = () => {
               Phone Number
             </label>
             <div className="relative">
+            <FaPhone  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
+           
               {/* Note: 'Phone' component/icon is assumed to be imported or defined elsewhere */}
               <input
                 type="tel"
@@ -145,6 +156,7 @@ const Signup = () => {
               Password
             </label>
             <div className="relative">
+            <TbPassword className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
               {/* Note: 'Lock' component/icon is assumed to be imported or defined elsewhere */}
               <input
                 type={showPassword ? "text" : "password"}
@@ -170,7 +182,8 @@ const Signup = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Confirm Password
             </label>
-            <div className="relative">
+            <div className="relative"> 
+            <TbLockPassword className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
               {/* Note: 'Lock' component/icon is assumed to be imported or defined elsewhere */}
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -199,14 +212,16 @@ const Signup = () => {
             Create Account
           </button>
         </form>
-
+1
         {/* Login Link */}
         <div className="text-center mt-6">
           <p className="text-gray-600 text-sm">
             Already have an account?{' '}
-            <a href="#" className="text-green-600 hover:text-green-700 font-semibold">
+            <Link to="/login">
+             <a href="#" className="text-green-600 hover:text-green-700 font-semibold">
               Login
-            </a>
+            </a> </Link>
+           
           </p>
         </div>
       </div>

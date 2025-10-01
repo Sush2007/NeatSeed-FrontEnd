@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('admin@neatseed.com');
@@ -84,7 +85,7 @@ const Login = () => {
               <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">
                 Remember me
               </label>
-            </div>
+            </div> 
             <a href="#" className="text-sm text-green-600 hover:text-green-700">
               Forgot password?
             </a>
@@ -101,10 +102,12 @@ const Login = () => {
 
         {/* Sign Up Link */}
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don’t have an account?{' '}
+          Don’t have an account?{' '} 
+          <Link to="/signup">
           <a href="/signup" className="text-green-600 hover:text-green-700 font-semibold">
             Sign Up
-          </a>
+          </a> 
+          </Link>
         </p>
 
        
