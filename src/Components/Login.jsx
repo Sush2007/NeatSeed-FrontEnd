@@ -2,13 +2,46 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('admin@neatseed.com');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login submitted:', { email, password });
+    setMessage('');
+    
+    if (!email || !password) {
+      setMessage('Please enter both email and password');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/api_login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage(`Welcome back, ${data.user.full_name}!`);
+        // Store user data in localStorage for session management
+        localStorage.setItem('adminUser', JSON.stringify(data.user));
+        // TODO: navigate to dashboard
+        setTimeout(() => {
+          // Redirect to dashboard or admin panel
+          window.location.href = '/dashboard';
+        }, 1500);
+      } else {
+        setMessage(data.message || 'Login failed');
+      }
+    } catch (err) {
+      setMessage('Network error. Please try again.');
+    }
   };
 
   return (
@@ -98,19 +131,19 @@ const Login = () => {
           >
             Login
           </button>
-        </form>
+          </form>
 
-        {/* Sign Up Link */}
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Don’t have an account?{' '} 
-          <Link to="/signup">
-          <a href="/signup" className="text-green-600 hover:text-green-700 font-semibold">
+          {message && (
+            <p className="text-center text-sm text-gray-700 mt-4">{message}</p>
+          )}
+
+          {/* Sign Up Link */}
+          <p className="text-center text-sm text-gray-600 mt-4">
+          Don’t have an account?{' '}
+          <Link to="/signup" className="text-green-600 hover:text-green-700 font-semibold">
             Sign Up
-          </a> 
           </Link>
         </p>
-
-       
       </div>
     </div>
   );
