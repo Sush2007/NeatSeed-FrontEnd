@@ -5,6 +5,7 @@ import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6"; 
 import { TbPassword } from "react-icons/tb";
 import { TbLockPassword } from "react-icons/tb";
+import { getApiUrl } from '../config/api';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +41,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api_signup', {
+      const response = await fetch(getApiUrl('signup'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
