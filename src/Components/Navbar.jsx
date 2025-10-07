@@ -6,7 +6,7 @@ const Navbar = () => {
     <>
     <nav className="flex justify-between items-center py-4 px-6 border-b border-gray-200">
       <div className="flex items-center">
-        <span className="text-green-700 font-bold text-xl">🌱 NeatSeed</span>
+        <span className="text-green-700 font-bold text-xl"> NeatSeed</span>
       </div>
       <Link to="/login">
        <button className="bg-green-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-green-800 transition">
