@@ -27,4 +27,11 @@ build/
 
 # OS files
 .DS_Store
-Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+#Environment variables 
+1.env

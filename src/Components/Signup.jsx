@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdPerson } from "react-icons/io"; 
 import { IoMdMail } from "react-icons/io";
-import { FaPhone } from "react-icons/fa6"; 
+import { FaPhone } from "react-icons/fa"; 
 import { TbPassword } from "react-icons/tb";
 import { TbLockPassword } from "react-icons/tb";
 import { getApiUrl } from '../config/api';
@@ -110,9 +110,10 @@ const Signup = () => {
         {/* Logo/Icon */}
         <div className="flex justify-center mb-6">
           <div className="bg-green-100 rounded-full p-4">
-            <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 3.6v8.47c0 4.51-3.08 8.73-8 9.93-4.92-1.2-8-5.42-8-9.93V7.78l8-3.6zm-1 4.82v2h2v-2h-2zm0 4v6h2v-6h-2z"/>
-            </svg>
+           
+          <div className="w-15 h-15  rounded-lg flex items-center justify-center">
+           <img src="logo.jpg" alt="logo" />
+          </div>
           </div>
         </div>
 
@@ -257,12 +258,16 @@ const Signup = () => {
           </div>
 
           {/* Submit Button */}
+          <Link to="/dashboard"> 
           <button
             type="submit"
             className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-md hover:shadow-lg mt-6"
           >
             Create Account
-          </button>
+          </button>  
+          </Link>
+          
+          
         </form>
 
         {/* Message Display */}
@@ -280,11 +285,8 @@ const Signup = () => {
         <div className="text-center mt-6">
           <p className="text-gray-600 text-sm">
             Already have an account?{' '}
-            <Link to="/login">
-             <a href="#" className="text-green-600 hover:text-green-700 font-semibold">
-              Login
-            </a> </Link>
-           
+            <Link to="/login" className="text-green-600 hover:text-green-700 font-semibold">Login</Link>
+            
           </p>
         </div>
       </div>

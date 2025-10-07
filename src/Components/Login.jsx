@@ -126,13 +126,16 @@ const Login = () => {
           </div>
 
           {/* Login Button */}
+          <Link to="/dashboard">
           <button
             type="submit"
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition duration-200"
           >
             Login
           </button>
-          </form>
+          </Link>
+         
+        </form>
 
           {message && (
             <p className="text-center text-sm text-gray-700 mt-4">{message}</p>
