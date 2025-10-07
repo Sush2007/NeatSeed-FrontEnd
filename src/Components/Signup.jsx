@@ -5,10 +5,12 @@ import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa"; 
 import { TbPassword } from "react-icons/tb";
 import { TbLockPassword } from "react-icons/tb";
+import { getApiUrl } from '../config/api';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -18,9 +20,59 @@ const Signup = () => {
     confirmPassword: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setMessage('');
+
+    // Validation
+    if (formData.password !== formData.confirmPassword) {
+      setMessage('Passwords do not match');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setMessage('Password must be at least 6 characters');
+      return;
+    }
+
+    if (!formData.fullName || !formData.email || !formData.phone || !formData.role) {
+      setMessage('Please fill in all fields');
+      return;
+    }
+
+    try {
+      const response = await fetch(getApiUrl('signup'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          role: formData.role,
+          password: formData.password
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage('Account created successfully! You can now login.');
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          role: '',
+          password: '',
+          confirmPassword: ''
+        });
+      } else {
+        setMessage(data.message || 'Signup failed');
+      }
+    } catch (error) {
+      setMessage('Network error. Please try again.');
+    }
   };
 
   const handleChange = (e) => {
@@ -217,7 +269,18 @@ const Signup = () => {
           
           
         </form>
-        
+
+        {/* Message Display */}
+        {message && (
+          <div className={`text-center text-sm mt-4 p-3 rounded-lg ${
+            message.includes('successfully') 
+              ? 'bg-green-100 text-green-700' 
+              : 'bg-red-100 text-red-700'
+          }`}>
+            {message}
+          </div>
+        )}
+
         {/* Login Link */}
         <div className="text-center mt-6">
           <p className="text-gray-600 text-sm">
