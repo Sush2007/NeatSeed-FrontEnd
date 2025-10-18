@@ -52,10 +52,16 @@ const Signup = () => {
           phone: formData.phone,
           role: formData.role,
           password: formData.password
-        }),
+        })
       });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json(); // Safely attempt to parse JSON
+      } catch (e) {
+        // Server didn't send JSON (e.g., a simple HTML error page)
+        data.message = 'An unexpected server error occurred.';
+      }
       
       if (response.ok) {
         setMessage('Account created successfully! You can now login.');
@@ -74,6 +80,7 @@ const Signup = () => {
       setMessage('Network error. Please try again.');
     }
   };
+});
 
   const handleChange = (e) => {
     setFormData({
