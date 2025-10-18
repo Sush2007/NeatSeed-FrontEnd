@@ -80,14 +80,13 @@ const Signup = () => {
       setMessage('Network error. Please try again.');
     }
   };
-});
 
-  const handleChange = (e) => {
-    setFormData({
+const handleChange = (e) => {
+  setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-  };
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-green-50 p-4">
