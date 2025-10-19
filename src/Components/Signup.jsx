@@ -15,7 +15,6 @@ const Signup = () => {
     fullName: '',
     email: '',
     phone: '',
-    role: '',
     password: '',
     confirmPassword: ''
   });
@@ -26,7 +25,7 @@ const Signup = () => {
     e.preventDefault();
     setMessage('');
     
-    if (!formData.fullName || !formData.email || !formData.phone || !formData.role) {
+    if (!formData.fullName || !formData.email || !formData.phone) {
       setMessage('Please fill in all fields');
       return;
     }
