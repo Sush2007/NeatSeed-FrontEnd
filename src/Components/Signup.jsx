@@ -25,20 +25,20 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
-
-    // Validation
-    if (formData.password !== formData.confirmPassword) {
-      setMessage('Passwords do not match');
+    
+    if (!formData.fullName || !formData.email || !formData.phone || !formData.role) {
+      setMessage('Please fill in all fields');
       return;
     }
-
+    
     if (formData.password.length < 6) {
       setMessage('Password must be at least 6 characters');
       return;
     }
 
-    if (!formData.fullName || !formData.email || !formData.phone || !formData.role) {
-      setMessage('Please fill in all fields');
+    // Validation
+    if (formData.password !== formData.confirmPassword) {
+      setMessage('Passwords do not match');
       return;
     }
 
@@ -52,7 +52,6 @@ const Signup = () => {
           fullName: formData.fullName,
           email: formData.email,
           phone: formData.phone,
-          role: formData.role,
           password: formData.password
         })
       });
