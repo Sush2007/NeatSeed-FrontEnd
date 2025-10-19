@@ -1,5 +1,5 @@
 import React, { useState } from 'react';  
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { IoMdPerson } from "react-icons/io"; 
 import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa"; 
@@ -19,6 +19,8 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,11 +71,14 @@ const Signup = () => {
           fullName: '',
           email: '',
           phone: '',
-          role: '',
           password: '',
           confirmPassword: ''
         });
-      } else {
+        setTimeout(() => {
+            navigate('/login'); // <-- Programmatic redirection
+        }, 1500);
+      }
+      else {
         setMessage(data.message || 'Signup failed');
       }
     } catch (error) {
@@ -244,14 +249,12 @@ const handleChange = (e) => {
           </div>
 
           {/* Submit Button */}
-          <Link to="/dashboard"> 
           <button
             type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-md hover:shadow-lg mt-6"
+            className="w-full bg-green-500 hover:bg-green-600 text-whitefont-semibold py-3 rounded-lg transition duration-200shadow-md hover:shadow-lg mt-6"
           >
             Create Account
-          </button>  
-          </Link>
+          </button> 
           
           
         </form>

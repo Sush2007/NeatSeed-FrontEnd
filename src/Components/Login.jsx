@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getApiUrl } from '../config/api.js';
 
 const Login = () => {
@@ -7,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ const Login = () => {
         // TODO: navigate to dashboard
         setTimeout(() => {
           // Redirect to dashboard or admin panel
-          window.location.href = '/dashboard';
+          navigate('/dashboard');
         }, 1500);
       } else {
         setMessage(data.message || 'Login failed');
@@ -108,33 +109,20 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Remember Me & Forgot Password */}
+          {/* Forgot Password */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="remember"
-                className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div> 
             <a href="#" className="text-sm text-green-600 hover:text-green-700">
               Forgot password?
             </a>
           </div>
 
           {/* Login Button */}
-          <Link to="/dashboard">
           <button
             type="submit"
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition duration-200"
           >
             Login
           </button>
-          </Link>
-         
         </form>
 
           {message && (
