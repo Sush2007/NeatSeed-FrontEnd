@@ -116,7 +116,6 @@ const handleChange = (e) => {
         {/* Logo/Icon */}
         <div className="flex justify-center mb-6">
           <div className="bg-green-100 rounded-full p-4">
-           
           <div className="w-15 h-15  rounded-lg flex items-center justify-center">
            <img src="logo.jpg" alt="logo" />
           </div>
@@ -188,25 +187,6 @@ const handleChange = (e) => {
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
               />
             </div>
-          </div>
-
-          {/* Role */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Admin Role
-            </label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition appearance-none bg-white"
-            >
-              <option value="">Select your role</option>
-              <option value="super-admin">Super Admin</option>
-              <option value="admin">Admin</option>
-              <option value="moderator">Moderator</option>
-              <option value="support">Support</option>
-            </select>
           </div>
 
           {/* Password */}
