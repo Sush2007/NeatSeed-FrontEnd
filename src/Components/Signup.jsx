@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import { IoMdPerson } from "react-icons/io"; 
 import { IoMdMail } from "react-icons/io";
-import { FaPhone } from "react-icons/fa"; 
 import { TbPassword } from "react-icons/tb";
 import { TbLockPassword } from "react-icons/tb";
 import { getApiUrl } from '../config/api.js';
@@ -14,7 +13,6 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    phone: '',
     password: '',
     confirmPassword: ''
   });
@@ -25,7 +23,7 @@ const Signup = () => {
     e.preventDefault();
     setMessage('');
     
-    if (!formData.fullName || !formData.email || !formData.phone) {
+    if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
       setMessage('Please fill in all fields');
       return;
     }
@@ -50,7 +48,6 @@ const Signup = () => {
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
-          phone: formData.phone,
           password: formData.password
         })
       });
@@ -68,7 +65,6 @@ const Signup = () => {
         setFormData({
           fullName: '',
           email: '',
-          phone: '',
           password: '',
           confirmPassword: ''
         });
@@ -167,26 +163,6 @@ const handleChange = (e) => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-              />
-            </div>
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Phone Number
-            </label>
-            <div className="relative">
-            <FaPhone  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
-           
-              {/* Note: 'Phone' component/icon is assumed to be imported or defined elsewhere */}
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Enter your phone number"
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
               />
             </div>
