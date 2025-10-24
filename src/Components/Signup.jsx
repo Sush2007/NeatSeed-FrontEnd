@@ -42,7 +42,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch(getApiUrl('admin_signup'), {
+      const response = await fetch(getApiUrl('signup'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

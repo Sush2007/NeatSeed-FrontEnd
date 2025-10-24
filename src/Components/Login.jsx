@@ -19,7 +19,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch(getApiUrl('admin_login'), {
+      const response = await fetch(getApiUrl('login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
