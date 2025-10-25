@@ -30,7 +30,7 @@ const Login = () => {
       const data = await response.json();
       
       if (response.ok) {
-        setMessage(`Welcome back, ${data.user.full_name}!`);
+        setMessage(`Welcome back`);
         // Store user data in localStorage for session management
         localStorage.setItem('adminUser', JSON.stringify(data.user));
         // TODO: navigate to dashboard
