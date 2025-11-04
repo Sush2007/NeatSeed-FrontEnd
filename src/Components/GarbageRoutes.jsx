@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
-import { Bell, BarChart3, Truck, MapPin, Home, BellRing, TrendingUp, Pencil, Trash2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Bell,  Truck, MapPin , Pencil, Trash2 } from 'lucide-react';
 
+import Sidebar from './Sidebar';
 export default function GarbageRoutes() {
-  const [activeNav, setActiveNav] = useState('Routes');
-
-  const navItems = [
-    { icon: BarChart3, label: 'Dashboard', path: '/dashboard' },
-    { icon: Truck, label: 'Trucks', path:'/trucks' },
-    { icon: MapPin, label: 'Routes', path:'/routes' },
-  
-    { icon: BellRing, label: 'Notifications ' , path:"/notification"},
-    { icon: TrendingUp, label: 'Analytics', path: "/analytics" },
-  ];
+ 
 
   const routes = [
     {
@@ -38,46 +29,9 @@ export default function GarbageRoutes() {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-white">
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
-        {/* Logo */}
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12  rounded-lg flex items-center justify-center">
-              <div className="w-27 h-27 rounded-full flex items-center justify-center">
-                <img src="logo.jpg" alt="" />
-              </div>
-            </div>
-            <span className="text-xl font-bold text-gray-800">NeatSeed</span>
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 p-4">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeNav === item.label;
-            return (
-              <Link to={item.path}>
-                <button
-                key={item.label}
-                onClick={() => setActiveNav(item.label)}
-                className={`w-full flex items-center gap-3 px-4 py-3 mb-2 rounded-lg transition-colors ${
-                  isActive
-                    ? 'bg-green-600 text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                <Icon className="w-5 h-5" />
-                <span className="font-medium">{item.label}</span>
-              </button>
-              </Link>
-            
-            );
-          })}
-        </nav>
-      </div>
+    <Sidebar/>
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
