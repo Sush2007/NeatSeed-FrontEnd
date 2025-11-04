@@ -2,6 +2,7 @@ import React from 'react';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Bell,BarChart3, Truck } from 'lucide-react';
 import {Link} from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 const Analytics = () => {
   // Daily collections data
@@ -28,60 +29,11 @@ const Analytics = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-white">
       {/* Left Sidebar Navigation */}
-      <div className="w-80 bg-white border-r border-gray-200 fixed h-full">
-        <div className="p-6">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-             <img src="logo.jpg" alt="" />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-800">NeatSeed</h1>
-          </div>
-          
-          <nav className="space-y-2">
-            <Link to="/dashboard">
-             <a href="#" className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-             <BarChart3 className='w-5 h-5'/>
-              <span className="font-medium">Dashboard</span>
-            </a>
-            </Link>
-           
-            <Link to="/trucks"> 
-            <a href="#" className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-              <Truck className="w-5 h-5" />
-              <span className="font-medium">Trucks</span>
-            </a>
-            </Link>
-           
-           <Link to="/routes">
-            <a href="#" className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="font-medium">Routes</span>
-            </a>
-           </Link>
-           
-            <Link to="/notification">
-            <a href="#" className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition">
-              <Bell className="w-5 h-5" />
-              <span className="font-medium">Notifications</span>
-            </a>
-            </Link>
-            
-            
-            <a href="#" className="flex items-center gap-3 px-4 py-3 bg-green-600 text-white rounded-lg transition">
-              <TrendingUp className="w-5 h-5" />
-              <span className="font-medium">Analytics</span>
-            </a>
-          </nav>
-        </div>
-      </div>
-
+     <Sidebar/>
       {/* Main Content Area */}
-      <div className="ml-80 flex-1">
+      <div className="flex-1">
         {/* Top Header Bar */}
         <div className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold text-gray-700">NeatSeed Admin Dashboard</h2>
