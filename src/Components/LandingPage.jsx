@@ -77,7 +77,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} id="hero-section" className="relative pt-32 pb-24 md:pt-48 md:pb-36 overflow-hidden bg-green-50 text-gray-900 min-h-screen flex items-center">
+    <section ref={ref} id="hero-section" className="relative pt-32 pb-24 md:pt-48 md:pb-36 overflow-hidden text-gray-900 min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <motion.div
           variants={containerVariants}
