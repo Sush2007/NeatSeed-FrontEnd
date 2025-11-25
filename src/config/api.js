@@ -4,7 +4,8 @@ const API_BASE_URL = 'https://neatseed-b.onrender.com';
 // API endpoints
 const API_ENDPOINTS = {
   login: '/admin/login',
-  signup: '/admin/signup'
+  signup: '/admin/signup',
+  verify_otp: '/admin/verify-otp'
 };
 
 // Helper function to get full endpoint URL
