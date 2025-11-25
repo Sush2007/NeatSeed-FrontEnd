@@ -74,6 +74,7 @@ const Signup = () => {
         setMessage(data.message || 'Signup failed');
       }
     } catch (error) {
+      console.error("Signup Error:", error);
       setMessage('Network error. Please try again.');
     }
   };
