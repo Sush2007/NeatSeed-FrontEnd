@@ -59,16 +59,17 @@ const Signup = () => {
       }
       
       if (response.ok) {
-        setMessage('Account created successfully! You can now login.');
-        setFormData({
-          email: '',
-          password: '',
-          confirmPassword: ''
+    setMessage('Account created successfully! Redirecting to verification...');
+    // Store email in state and navigate
+    setTimeout(() => {
+        navigate('/verify-otp', { 
+            state: { 
+                email: formData.email, // Pass the email from your form state
+                role: 'admin'          // Hardcode role for this app
+            } 
         });
-        setTimeout(() => {
-            navigate('/login'); // <-- Programmatic redirection
-        }, 1500);
-      }
+    }, 1500);
+}
       else {
         setMessage(data.message || 'Signup failed');
       }

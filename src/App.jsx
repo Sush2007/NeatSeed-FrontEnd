@@ -23,6 +23,7 @@ function App() {
         <Route path="/notification" element={<Notifications/>}> </Route>
         <Route path="/analytics" element={<Analytics/>}> </Route>
         <Route path="*" element={<h2 className="p-8">Page Not Found</h2>} />
+        <Route path="/verify-otp" element={<OtpVerification />} />
       </Routes>
     </BrowserRouter>
   );
