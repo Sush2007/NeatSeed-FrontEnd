@@ -8,6 +8,7 @@ import Trucks from './Components/Trucks';
 import GarbageRoutes from './Components/GarbageRoutes';
 import Notifications from './Components/Notifications';
 import Analytics from './Components/Analytics';
+import OtpVerification from './Components/OtpVerification';
 
 
 function App() {
