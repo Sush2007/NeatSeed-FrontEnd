@@ -52,7 +52,8 @@ const Signup = () => {
 
       let data = {};
       try {
-        data = await response.json(); // Safely attempt to parse JSON
+        const data = await response.json();
+        console.log("Server Response:", data);
       } catch (e) {
         // Server didn't send JSON (e.g., a simple HTML error page)
         data.message = 'An unexpected server error occurred.';
