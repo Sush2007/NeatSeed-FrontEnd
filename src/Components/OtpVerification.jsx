@@ -52,15 +52,11 @@ const OtpVerificationContent = () => {
   const { email, role } = location.state || { email: 'your-email@example.com', role: 'user' };
 
   useEffect(() => {
-    // Optional: Redirect if no email found (security best practice)
-    // if (!location.state?.email) navigate('/login'); 
-
-    let interval;
-    if (timer > 0) {
-      interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
-    }
+    const interval = setInterval(() => {
+      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
     return () => clearInterval(interval);
-  }, [timer]); // Add navigate to dependency if uncommenting redirect
+  }, []);
 
   const handleChange = (index, value) => {
     if (isNaN(value)) return;
@@ -78,57 +74,67 @@ const OtpVerificationContent = () => {
     }
   };
 
-  const handlePaste = (e) => {
-    e.preventDefault();
-    const data = e.clipboardData.getData('text').slice(0, 6).split('');
-    if (data.length === 6 && data.every(char => !isNaN(char))) {
-      setOtp(data);
-      inputRefs.current[5].focus();
-    }
-  };
-
   const handleVerify = async (e) => {
     e.preventDefault();
     const code = otp.join('');
     if (code.length !== 6) {
-      setError('Please enter the full 6-digit code.');
+      setError('Please enter the 6-digit code');
       return;
     }
-    setIsLoading(true);
     setError('');
+    setIsLoading(true);
 
     try {
       const response = await fetch(getApiUrl('verify_otp'), {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', // <--- THIS WAS MISSING
-        },
-        body: JSON.stringify({ email, otp: code, role })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            email, 
+            otp: code, 
+            role: 'admin' // Force role to admin here
+        })
       });
 
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSuccess('Verified successfully!');
+      const data = await response.json();
 
-      setTimeout(() => {
-        if (role === 'admin') {
-          navigate('/dashboard'); // Admin Dashboard
-        } else {
-          navigate('/'); // Client/User Home or Dashboard
-        }
-      }, 1000);
+      if (response.ok) {
+        setSuccess('Verified! Redirecting to login...');
+        setTimeout(() => {
+          navigate('/login'); 
+        }, 1500);
+      } else {
+        setError(data.message || 'Invalid OTP');
+      }
     } catch (err) {
-      setError('Invalid OTP. Please try again.');
+      setError('Network error. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     if (timer === 0) {
       setTimer(30);
       setError('');
-      setSuccess('New code sent!');
-      // Trigger backend resend API here using `email` variable
+      setSuccess('');
+      
+      try {
+        const response = await fetch(getApiUrl('resend_otp'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }) // Admin route implies admin role
+        });
+        
+        const data = await response.json();
+
+        if (response.ok) {
+          setSuccess('New OTP sent to your email!');
+        } else {
+          setError(data.message || 'Failed to resend OTP');
+        }
+      } catch (err) {
+        setError('Network error. Could not resend.');
+      }
     }
   };
 
