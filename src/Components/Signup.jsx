@@ -72,7 +72,8 @@ const Signup = () => {
         }, 1500);
       }
       else {
-        setMessage(data.message || 'Signup failed');
+       const errorText = data.message || data.error || 'Signup failed. Please try again.';
+        setMessage(errorText);
       }
     } catch (error) {
       console.error("Signup Error:", error);
