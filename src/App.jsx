@@ -25,6 +25,9 @@ function App() {
         <Route path="/analytics" element={<Analytics/>}> </Route>
         <Route path="*" element={<h2 className="p-8">Page Not Found</h2>} />
         <Route path="/verify-otp" element={<OtpVerification />} />
+        <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} 
+        />
+
       </Routes>
     </BrowserRouter>
   );
