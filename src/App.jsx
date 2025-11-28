@@ -12,7 +12,9 @@ import OtpVerification from './Components/OtpVerification';
 
 function App() {
   const isAuthenticated = () => {
-    return localStorage.getItem('admin_token') !== null;
+    const token = localStorage.getItem('admin_token');
+    console.log("Checking Auth Token:", token);
+    return token !== null;
   };
 
   return (

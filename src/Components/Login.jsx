@@ -60,6 +60,8 @@ const Login = () => {
       // Store auth token if provided
       const tokenToStore = data.token || 'verified_session_token'; 
       localStorage.setItem('admin_token', tokenToStore);
+
+      console.log("Token saved to Storage:", localStorage.getItem('admin_token'));
       
       setTimeout(() => {
         navigate('/dashboard');
