@@ -47,8 +47,6 @@ const OtpVerificationContent = () => {
   const navigate = useNavigate();
   const inputRefs = useRef([]);
 
-  // --- KEY CHANGE: Extract Email & Role from Navigation State ---
-  // If state is missing (e.g. direct URL access), fallback or redirect
   const { email, role } = location.state || { email: 'your-email@example.com', role: 'user' };
 
   useEffect(() => {
@@ -73,6 +71,16 @@ const OtpVerificationContent = () => {
       inputRefs.current[index - 1].focus();
     }
   };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const data = e.clipboardData.getData('text').slice(0, 6).split('');
+    if (data.length === 6 && data.every(char => !isNaN(char))) {
+      setOtp(data);
+      inputRefs.current[5].focus();
+    }
+  };
+  
 
   const handleVerify = async (e) => {
     e.preventDefault();
