@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; // <--- 1. Added Navigate
 import LandingPage from './Components/LandingPage';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
@@ -10,24 +10,43 @@ import Notifications from './Components/Notifications';
 import Analytics from './Components/Analytics';
 import OtpVerification from './Components/OtpVerification';
 
-
 function App() {
+  const isAuthenticated = () => {
+    return localStorage.getItem('admin_token') !== null;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/trucks" element={<Trucks/>}/> 
-        <Route path='/routes' element={<GarbageRoutes/>}> </Route>
-        <Route path="/notification" element={<Notifications/>}> </Route>
-        <Route path="/analytics" element={<Analytics/>}> </Route>
-        <Route path="*" element={<h2 className="p-8">Page Not Found</h2>} />
         <Route path="/verify-otp" element={<OtpVerification />} />
-        <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} 
+
+        <Route 
+          path="/dashboard" 
+          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} 
+        />
+        <Route 
+          path="/trucks" 
+          element={isAuthenticated() ? <Trucks /> : <Navigate to="/login" />}
+        /> 
+        <Route 
+          path='/routes' 
+          element={isAuthenticated() ? <GarbageRoutes /> : <Navigate to="/login" />}
+        />
+        <Route 
+          path="/notification" 
+          element={isAuthenticated() ? <Notifications /> : <Navigate to="/login" />}
+        />
+        <Route 
+          path="/analytics" 
+          element={isAuthenticated() ? <Analytics /> : <Navigate to="/login" />}
         />
 
+        {/* 404 Route */}
+        <Route path="*" element={<h2 className="p-8">Page Not Found</h2>} />
       </Routes>
     </BrowserRouter>
   );
