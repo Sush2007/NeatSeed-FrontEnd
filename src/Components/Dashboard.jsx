@@ -7,9 +7,6 @@ import { initializeMap, addTruckMarkers } from '../mapConfig';
 import Sidebar from './Sidebar';
 
 
-// Sidebar Component
-<Sidebar/>
-
 // Header Component
 const Header = () => {
   return (

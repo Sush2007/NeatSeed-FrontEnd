@@ -143,7 +143,6 @@ const Login = () => {
           </div>
 
           {/* Login Button */}
-          <Link to="/dashboard">
           <button
             type="submit"
             disabled={isLoading}
@@ -161,7 +160,6 @@ const Login = () => {
               'Login'
             )}
           </button>
-          </Link>
         </form>
 
           {message && (
