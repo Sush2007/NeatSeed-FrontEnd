@@ -34,46 +34,47 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log('Response status:', response.status);
-      
-      // Check if response is ok before parsing JSON
+      console.log('Fetch response object:', response);
+
+      if (!response) {
+        throw new Error("Network Error: The request failed to return a response.");
+      }
       if (!response.ok) {
         let errorData = {};
-        try {
-          errorData = await response.json();
-        } catch (parseError) {
-          // Ignore parsing error
-        }
-        setMessage(errorData.message || 'Login failed. Please check credentials.');
+        try { errorData = await response.json(); } catch (e) {}
+        setMessage(errorData.message || `Login failed (Status: ${response.status})`);
         setIsLoading(false);
         return;
       }
 
-      // Parse JSON only if response is ok
       const data = await response.json();
       
-      setMessage('Welcome back! Redirecting...');
-      // Store user data in localStorage for session management
-      if (data.user) {
-        localStorage.setItem('adminUser', JSON.stringify(data.user));
+      if (data.ok) {
+        setMessage('Welcome back! Redirecting...');
+        
+        // Store User & Token
+        if (data.user) {
+          localStorage.setItem('adminUser', JSON.stringify(data.user));
+        }
+        const tokenToStore = data.token || 'verified_session_token'; 
+        localStorage.setItem('admin_token', tokenToStore);
+        
+        // Redirect
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1500);
+      } else {
+        setMessage(data.message || 'Login failed');
+        setIsLoading(false);
       }
-      // Store auth token if provided
-      const tokenToStore = data.token || 'verified_session_token'; 
-      localStorage.setItem('admin_token', tokenToStore);
-
-      console.log("Token saved to Storage:", localStorage.getItem('admin_token'));
-      
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
 
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Login Critical Error:', err);
       setIsLoading(false);
-      setMessage('Network error. Check console for details.');
+      setMessage(`System Error: ${err.message}`);
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center p-4 relative">
       {/* Decorative leaves (background elements) */}
