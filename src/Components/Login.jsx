@@ -34,32 +34,39 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log('Fetch response object:', response);
-
-      if (!response) {
-        throw new Error("Network Error: The request failed to return a response.");
-      }
-      if (!response.ok) {
+     if (!response.ok) {
         let errorData = {};
-        try { errorData = await response.json(); } catch (e) {}
-        setMessage(errorData.message || `Login failed (Status: ${response.status})`);
+        try {
+          errorData = await response.json();
+        } catch (parseError) {}
+        
+        // --- FIX: HANDLE UNVERIFIED USER REDIRECT ---
+        if (response.status === 403 && errorData.redirect_to_verify) {
+            setMessage('Account unverified. Sending new OTP...');
+            setTimeout(() => {
+                navigate('/verify-otp', { state: { email: email, role: 'admin' } });
+            }, 1500);
+            return;
+        }
+
+        setMessage(errorData.message || 'Login failed. Please check credentials.');
         setIsLoading(false);
         return;
       }
 
+      // Handle Success
       const data = await response.json();
       
       if (data.ok) {
         setMessage('Welcome back! Redirecting...');
         
-        // Store User & Token
         if (data.user) {
           localStorage.setItem('adminUser', JSON.stringify(data.user));
         }
+        
         const tokenToStore = data.token || 'verified_session_token'; 
         localStorage.setItem('admin_token', tokenToStore);
         
-        // Redirect
         setTimeout(() => {
           navigate('/dashboard');
         }, 1500);
@@ -69,9 +76,9 @@ const Login = () => {
       }
 
     } catch (err) {
-      console.error('Login Critical Error:', err);
+      console.error('Login error:', err);
       setIsLoading(false);
-      setMessage(`System Error: ${err.message}`);
+      setMessage('Network error. Check console for details.');
     }
   };
   
