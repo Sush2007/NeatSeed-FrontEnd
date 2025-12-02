@@ -68,7 +68,7 @@ const Login = () => {
         localStorage.setItem('admin_token', tokenToStore);
         
         setTimeout(() => {
-          navigate('/dashboard');
+          window.location.href = '/dashboard'; 
         }, 1500);
       } else {
         setMessage(data.message || 'Login failed');

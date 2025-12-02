@@ -14,7 +14,7 @@ function App() {
   const isAuthenticated = () => {
     const token = localStorage.getItem('admin_token');
     console.log("Checking Auth Token:", token);
-    return token !== null;
+    return token && token !== "" && token !== "undefined";
   };
 
   return (
