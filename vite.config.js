@@ -7,4 +7,14 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss()
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://neatseed-b.onrender.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: true,
+      }
+    }
+  }
 })
