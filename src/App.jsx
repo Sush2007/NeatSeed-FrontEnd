@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; // <--- 1. Added Navigate
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from './Components/LandingPage';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
@@ -11,13 +11,21 @@ import Analytics from './Components/Analytics';
 import OtpVerification from './Components/OtpVerification';
 import Forgetpass from './Components/Forgetpass';
 
-function App() {
-  const isAuthenticated = () => {
-    const token = localStorage.getItem('admin_token');
-    console.log("Checking Auth Token:", token);
-    return token && token !== "" && token !== "undefined";
-  };
+// 1. Create a ProtectedRoute component
+// This component checks the token every time the route is accessed.
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('admin_token');
+  
+  // If no token, redirect to login immediately
+  if (!token || token === "undefined") {
+    return <Navigate to="/login" replace />;
+  }
+  
+  // If token exists, render the requested page (children)
+  return children;
+};
 
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -28,25 +36,46 @@ function App() {
         <Route path="/verify-otp" element={<OtpVerification />} />
         <Route path="/forgetpass" element={<Forgetpass />} />
 
+        {/* 2. Wrap your protected routes with the component */}
         <Route 
           path="/dashboard" 
-          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} 
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } 
         />
         <Route 
           path="/trucks" 
-          element={isAuthenticated() ? <Trucks /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Trucks />
+            </ProtectedRoute>
+          }
         /> 
         <Route 
           path='/routes' 
-          element={isAuthenticated() ? <GarbageRoutes /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <GarbageRoutes />
+            </ProtectedRoute>
+          }
         />
         <Route 
           path="/notification" 
-          element={isAuthenticated() ? <Notifications /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
+          }
         />
         <Route 
           path="/analytics" 
-          element={isAuthenticated() ? <Analytics /> : <Navigate to="/login" />}
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
         />
 
         {/* 404 Route */}
