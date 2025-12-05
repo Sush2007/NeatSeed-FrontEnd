@@ -9,6 +9,7 @@ import GarbageRoutes from './Components/GarbageRoutes';
 import Notifications from './Components/Notifications';
 import Analytics from './Components/Analytics';
 import OtpVerification from './Components/OtpVerification';
+import Forgetpass from './Components/Forgetpass';
 
 function App() {
   const isAuthenticated = () => {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-otp" element={<OtpVerification />} />
+        <Route path="/forgetpass" element={<Forgetpass />} />
 
         <Route 
           path="/dashboard" 

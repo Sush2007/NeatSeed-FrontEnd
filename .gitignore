@@ -35,3 +35,6 @@ build/
 
 #Environment variables 
 1.env
+
+#Misc
+Resolved-issues.txt

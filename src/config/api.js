@@ -1,5 +1,8 @@
 // API configuration
-const API_BASE_URL = 'https://neatseed-b.onrender.com';
+// Use proxy in development, direct URL in production
+const API_BASE_URL = import.meta.env.DEV 
+  ? '/api'  // Vite proxy will handle this
+  : 'https://neatseed-b.onrender.com';
 
 // API endpoints
 const API_ENDPOINTS = {

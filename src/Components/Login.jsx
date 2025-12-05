@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getApiUrl } from '../config/api.js'; 
+import Forgetpass from './Forgetpass.jsx';
 
 
 const Login = () => {
@@ -32,6 +33,8 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        mode: 'cors', // Explicitly set CORS mode
+        credentials: 'omit', // Don't send cookies unless needed
       });
 
      if (!response.ok) {
@@ -69,7 +72,7 @@ const Login = () => {
         
         setTimeout(() => {
           window.location.href = '/dashboard'; 
-        }, 1500);
+        }, 1000);
       } else {
         setMessage(data.message || 'Login failed');
         setIsLoading(false);
@@ -77,8 +80,21 @@ const Login = () => {
 
     } catch (err) {
       console.error('Login error:', err);
+      console.error('Error details:', {
+        name: err.name,
+        message: err.message,
+        stack: err.stack
+      });
       setIsLoading(false);
-      setMessage('Network error. Check console for details.');
+      
+      // Provide more specific error messages
+      if (err.name === 'TypeError' && err.message.includes('fetch')) {
+        setMessage('Cannot connect to server. Please check your internet connection or try again later.');
+      } else if (err.name === 'TypeError' && err.message.includes('CORS')) {
+        setMessage('CORS error: Server configuration issue. Please contact support.');
+      } else {
+        setMessage(`Network error: ${err.message || 'Please try again later.'}`);
+      }
     }
   };
   
@@ -147,9 +163,11 @@ const Login = () => {
 
           {/* Forgot Password */}
           <div className="flex items-center justify-between">
+            <Link to="/forgetpass">
             <a href="#" className="text-sm text-green-600 hover:text-green-700">
               Forgot password?
             </a>
+             </Link>
           </div>
 
           {/* Login Button */}
