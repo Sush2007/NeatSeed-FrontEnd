@@ -71,27 +71,19 @@ const Login = () => {
         localStorage.setItem('admin_token', tokenToStore);
         
         setTimeout(() => {
-          window.location.href = '/dashboard'; 
+          navigate('/dashboard');
         }, 1000);
-      } else {
+      }else {
         setMessage(data.message || 'Login failed');
         setIsLoading(false);
       }
 
     } catch (err) {
       console.error('Login error:', err);
-      console.error('Error details:', {
-        name: err.name,
-        message: err.message,
-        stack: err.stack
-      });
       setIsLoading(false);
       
-      // Provide more specific error messages
       if (err.name === 'TypeError' && err.message.includes('fetch')) {
-        setMessage('Cannot connect to server. Please check your internet connection or try again later.');
-      } else if (err.name === 'TypeError' && err.message.includes('CORS')) {
-        setMessage('CORS error: Server configuration issue. Please contact support.');
+        setMessage('Cannot connect to server. Check internet connection.');
       } else {
         setMessage(`Network error: ${err.message || 'Please try again later.'}`);
       }
@@ -163,7 +155,7 @@ const Login = () => {
 
           {/* Forgot Password */}
           <div className="flex items-center justify-between">
-            <Link to="/forgetpass">
+            <Link to="/Forgetpass">
             <a href="#" className="text-sm text-green-600 hover:text-green-700">
               Forgot password?
             </a>
